@@ -12,15 +12,20 @@ if (storedToDos) {
 }
 
 button.addEventListener("click", () => {
-  if (input.value != "") {
-    toDosArray.push(input.value);
-    localStorage.setItem("toDos", JSON.stringify(toDosArray));
+  if (input.value !== "") {
+    const isDuplicate = toDosArray.includes(input.value);
 
-    addToDos();
+    if (isDuplicate) {
+      alert("This task has already been recorded!");
+      input.value = "";
+    } else {
+      toDosArray.push(input.value);
+      localStorage.setItem("toDos", JSON.stringify(toDosArray));
 
-    input.value = "";
-  } else {
-    alert("no task added");
+      addToDos();
+
+      input.value = "";
+    }
   }
 });
 
